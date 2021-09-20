@@ -1,9 +1,17 @@
 import * as React from 'react';
 
-const QuestionCard = () => {
-    return (
-        <div>Question Card</div>
-    )
+type Props = {
+    question: string;
+    answer: string[];
+    callback: any;
+    userAnswer: string;
+    questionNumber: number;
+    totalQuestions: number;
+
 }
+
+const QuestionCard = () => (
+<div>Question Card</div>
+)
 
 export default QuestionCard;
