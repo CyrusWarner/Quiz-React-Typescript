@@ -39,7 +39,25 @@ const App = () => {
     setLoading(false);
   };
 
-  const checkAnswer = (e: MouseEvent) => {};
+  const checkAnswer = (e: MouseEvent<HTMLButtonElement>) => {
+    if(!gameOver) {
+      // Users answer
+      const answer: string = e.currentTarget.value;
+      // Check answer against the correct answer
+      const correct: boolean = questions[number].correct_answer === answer;
+      // Add score if answer is correct
+      if(correct) setScore(previous => previous + 1);
+      //Save answer in the array for users answers
+      // answer, is the same as answer: answer
+      const answerObject = {
+        question: questions[number].question,
+        answer,
+        correct,
+        correctAnswer: questions[number].correct_answer,
+      };
+      setUserAnswers((prev) => [...prev, answerObject]);
+    }
+  };
 
   const nextQuestion = () => {};
   return (
@@ -62,9 +80,11 @@ const App = () => {
         callback={checkAnswer}
       />
       }
+      {!gameOver && !loading && userAnswers.length === number + 1 && number !== TOTAL_QUESTIONS - 1 &&
       <button className="next" onClick={nextQuestion}>
         Next Question
       </button>
+      }
     </div>
   );
 };
