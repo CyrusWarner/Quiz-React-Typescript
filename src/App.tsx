@@ -3,7 +3,7 @@ import React, { MouseEvent, useState } from "react";
 import { QuestionState, fetchQuizQuestions } from "./API";
 //Components
 import QuestionCard from "./components/QuestionCard";
-//Types 
+//Types
 import { Difficulty } from "./API";
 
 type AnswerObject = {
@@ -11,7 +11,7 @@ type AnswerObject = {
   answer: string;
   correct: boolean;
   correctAnswer: string;
-}
+};
 
 const TOTAL_QUESTIONS = 10;
 
@@ -28,15 +28,15 @@ const App = () => {
     setGameOver(false);
 
     const newQuestions = await fetchQuizQuestions(
-      TOTAL_QUESTIONS, Difficulty.EASY
-      );
+      TOTAL_QUESTIONS,
+      Difficulty.EASY
+    );
 
-      setQuestions(newQuestions)
-      setScore(0);
-      setUserAnswers([]);
-      setNumber(0);
-      setLoading(false);
-    
+    setQuestions(newQuestions);
+    setScore(0);
+    setUserAnswers([]);
+    setNumber(0);
+    setLoading(false);
   };
 
   const checkAnswer = (e: MouseEvent) => {};
@@ -45,11 +45,13 @@ const App = () => {
   return (
     <div className="App">
       <h1>React Quiz</h1>
-      <button className="start" onClick={startQuiz}>
-        Start Quiz
-      </button>
-      <p className="score">Score:</p>
-      <p>Loading Questions ...</p>
+      {gameOver || userAnswers.length === TOTAL_QUESTIONS ? (
+        <button className="start" onClick={startQuiz}>
+          Start Quiz
+        </button>
+      ) : null}
+      {!gameOver ? <p className="score">Score:</p> : null}
+      {loading && <p>Loading Questions ...</p>}
       {/* <QuestionCard
         questionNumber={number + 1}
         totalQuestions={TOTAL_QUESTIONS}
