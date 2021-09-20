@@ -1,12 +1,13 @@
 import React, { MouseEvent, useState } from "react";
-//API
 import { QuestionState, fetchQuizQuestions } from "./API";
 //Components
 import QuestionCard from "./components/QuestionCard";
 //Types
 import { Difficulty } from "./API";
+//Styles
+import { GlobalStyle } from "./App.styles";
 
-type AnswerObject = {
+export type AnswerObject = {
   question: string;
   answer: string;
   correct: boolean;
@@ -72,6 +73,8 @@ const App = () => {
     }
   };
   return (
+    <>
+    <GlobalStyle />
     <div className="App">
       <h1>React Quiz</h1>
       {gameOver || userAnswers.length === TOTAL_QUESTIONS ? (
@@ -79,7 +82,7 @@ const App = () => {
           Start Quiz
         </button>
       ) : null}
-      {!gameOver ? <p className="score">Score:</p> : null}
+      {!gameOver ? <p className="score">Score: {score}</p> : null}
       {loading && <p>Loading Questions ...</p>}
       {!loading && !gameOver &&
       <QuestionCard
@@ -97,6 +100,7 @@ const App = () => {
       </button>
       }
     </div>
+    </>
   );
 };
 
