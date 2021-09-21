@@ -91,9 +91,13 @@ const App = () => {
         ) : null}
         {!gameOver ? <p className="score">Score: {score}</p> : null}
         {loading && <p>Loading Questions ...</p>}
-        <button onClick={checkDifficulty} value={Difficulty.EASY} className="start">Easy</button>
-        <button onClick={checkDifficulty} value={Difficulty.MEDIUM} className="start">Medium</button>
-        <button onClick={checkDifficulty} value={Difficulty.HARD} className="start">Hard</button>
+        {gameOver && !loading &&
+        <Wrapper>
+        <button disabled={difficulty === Difficulty.EASY} onClick={checkDifficulty} value={Difficulty.EASY} className="start">Easy</button>
+        <button disabled={difficulty === Difficulty.MEDIUM} onClick={checkDifficulty} value={Difficulty.MEDIUM} className="start">Medium</button>
+        <button disabled={difficulty === Difficulty.HARD} onClick={checkDifficulty} value={Difficulty.HARD} className="start">Hard</button>
+        </Wrapper>
+        }
         {!loading && !gameOver && (
           <QuestionCard
             questionNumber={number + 1}
