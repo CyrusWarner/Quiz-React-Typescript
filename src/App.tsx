@@ -28,7 +28,6 @@ const App = () => {
   const startQuiz = async () => {
     setLoading(true);
     setGameOver(false);
-
     const newQuestions = await fetchQuizQuestions(
       TOTAL_QUESTIONS,
       difficulty
@@ -89,15 +88,15 @@ const App = () => {
             Start Quiz
           </button>
         ) : null}
-        {!gameOver ? <p className="score">Score: {score}</p> : null}
         {loading && <p>Loading Questions ...</p>}
-        {gameOver && !loading &&
-        <Wrapper>
-        <button disabled={difficulty === Difficulty.EASY} onClick={checkDifficulty} value={Difficulty.EASY} className="start">Easy</button>
-        <button disabled={difficulty === Difficulty.MEDIUM} onClick={checkDifficulty} value={Difficulty.MEDIUM} className="start">Medium</button>
-        <button disabled={difficulty === Difficulty.HARD} onClick={checkDifficulty} value={Difficulty.HARD} className="start">Hard</button>
-        </Wrapper>
+        {(gameOver || userAnswers.length === TOTAL_QUESTIONS) && !loading &&
+        <div>
+        <button disabled={difficulty === Difficulty.EASY} onClick={checkDifficulty} value={Difficulty.EASY} className="difficulty">Easy</button>
+        <button disabled={difficulty === Difficulty.MEDIUM} onClick={checkDifficulty} value={Difficulty.MEDIUM} className="difficulty">Medium</button>
+        <button disabled={difficulty === Difficulty.HARD} onClick={checkDifficulty} value={Difficulty.HARD} className="difficulty">Hard</button>
+        </div>
         }
+        {!gameOver ? <p className="score">Score: {score}</p> : null}
         {!loading && !gameOver && (
           <QuestionCard
             questionNumber={number + 1}
