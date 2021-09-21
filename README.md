@@ -1,4 +1,4 @@
-#React Quiz TypeScript
+# React Quiz TypeScript
 
 ![](src/Images/ReactQuiz.png)
 
