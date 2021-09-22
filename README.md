@@ -43,6 +43,7 @@ BUGGED =    :warning:
 
 ### Future Tasks  
 :x: Add ability for a user to choose a quiz by category
+
 :x: Add ability for a user to choose the amount of questions for the quiz
 
 ---
